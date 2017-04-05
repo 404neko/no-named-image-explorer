@@ -19,10 +19,6 @@
 
 QStringList g_filters = {"png", "gif", "jpg", "jpeg", "webp"};
 
-void d(QString msg){
-    std::cout<<msg.toStdString()<<std::endl;
-}
-
 QStringList list_dir(QString path){
     QDir dir(path);
     dir.setFilter(QDir::Files);
@@ -110,6 +106,7 @@ int main(int argc, char *argv[])
     mQLabel *image_label = new mQLabel();
     //QSize size =
     QObject::connect(image_label, SIGNAL(next_image(int,int)), &w, SLOT(next_image_resize(int, int)));
+    //QObject::connect(image_label, SIGNAL(next_image(int,int)), main_widget, SLOT(next_image_resize(int, int)));
     image_label->set_image(file_path);
     stacked_layout->addWidget(image_label);
     w.setCentralWidget(main_widget);

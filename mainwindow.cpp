@@ -1,7 +1,15 @@
 #include "mainwindow.h"
+
 #include <Windows.h>
 #include <Windowsx.h>
 #include <QMouseEvent>
+#include <QApplication>
+#include <QDesktopWidget>
+
+#include <iostream>
+
+
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -43,5 +51,6 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 }
 
 void MainWindow::next_image_resize(int w, int h){
-        this->resize(w+128, h+128);
+        this->resize(w+32, h+32);
+        this->move((QApplication::desktop()->width() - this->width())/2,(QApplication::desktop()->height() - this->height())/2);
     }

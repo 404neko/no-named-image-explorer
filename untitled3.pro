@@ -31,3 +31,5 @@ SOURCES += main.cpp\
 HEADERS  += mainwindow.h \
     mqlabel.h \
     mqwidget.h
+
+RESOURCES +=

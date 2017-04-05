@@ -9,10 +9,6 @@ class mQWidget : public QWidget
 public:
     explicit mQWidget(QWidget *parent = 0);
     ~mQWidget();
-
-signals:
-
-public slots:
 };
 
 #endif // MQWIDGET_H

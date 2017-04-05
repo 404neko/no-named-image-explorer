@@ -10,10 +10,15 @@
 #include <QApplication>
 #include <QRect>
 #include <QPainter>
+#include <QPixmap>
 
 #include <iostream>
 
 using namespace std;
+
+void d(QString msg){
+    std::cout<<msg.toStdString()<<std::endl;
+}
 
 mQLabel::mQLabel(){
     this->setFocusPolicy(Qt::StrongFocus);
@@ -66,37 +71,44 @@ QSize mQLabel::set_image(QString file_path){
     QRect screen = desktop->screenGeometry();
     int screen_width = screen.width();
     int screen_height = screen.height();
-
-    QSize size;
+    QImage image(file_path);
+    QSize size = image.size();
+    int set_width = 0;
+    int set_height = 0;
+    if(size.width()>(screen_width-32)||size.height()>(screen_height-32)){
+        this->max_scaled = std::max(
+                    (size.width()+0.0)/screen_width,
+                    (size.height()+0.0)/screen_height
+                    );
+        set_width = size.width()/this->max_scaled-64;
+        set_height = size.height()/this->max_scaled-64;
+    }
+    else{
+        set_width = size.width();
+        set_height = size.height();
+    }
 
     if(animated){
         QMovie *movie = new QMovie(file_path);
-        QImage *image = new QImage(file_path);
-        size = image->size();
         this->setMovie(movie);
         this->setAlignment(Qt::AlignCenter);
         movie->start();
+
     }
     else{
-        QImage image(file_path);
-        size = image.size();
-        float scaled_width = size.width()/screen_width;
-        float scaled_height = size.height()/screen_height;
-        if(scaled_height>1.0||scaled_width>1.0){
-            this->max_scaled = std::max(scaled_height, scaled_width) + 1;
-        }
-        QPixmap pixmap = QPixmap::fromImage(image).scaled(size.width()/max_scaled, size.height()/max_scaled, Qt::KeepAspectRatio);//.scaled(size.height()/max_scaled, size.width()/max_scaled, Qt::KeepAspectRatio);
+        QPixmap pixmap = QPixmap::fromImage(image);
+        pixmap = pixmap.scaled(set_width, set_height, Qt::KeepAspectRatio);
         this->setPixmap(pixmap);
         this->setAlignment(Qt::AlignCenter);
-        //this->next_image(30, 30);
     }
+    this->next_image(set_width, set_height);
+    d(QString::number(this->max_scaled));
+    d(QString::number(set_height));
+
     return size;
 }
 
 mQLabel::~mQLabel(){
     ;
 }
-/*
-void mQLabel::next_image(int w, int h){
-    ;
-}*/
+

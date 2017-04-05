@@ -5,6 +5,8 @@
 #include <QEvent>
 #include <QLabel>
 #include <QSize>
+#include <QPixmap>
+
 #include "mainwindow.h"
 
 class mQLabel : public QLabel
@@ -15,11 +17,11 @@ public:
     ~mQLabel();
     bool key_press(int key_code);
     QSize set_image(QString path);
-
     QString now;
     QStringList image_list;
     float max_scaled;
     MainWindow* p_mainwindow;
+
 protected:
     void keyPressEvent(QKeyEvent *e);
 signals:
