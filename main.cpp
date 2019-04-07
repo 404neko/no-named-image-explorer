@@ -1,28 +1,20 @@
-#include "mainwindow.h"
 
-#include "mqlabel.h"
-#include "mqwidget.h"
 
-#include <QApplication>
-#include <QMovie>
-#include <QObject>
-#include <QPalette>
-#include <QStackedLayout>
-#include <QWidget>
-#include <QFileDialog>
-#include <QDir>
-#include <QDirIterator>
-#include <QFileInfo>
+#include "MainWindow.h"
 
-#include <iostream>
-#include <filesystem>
+#include "mQLabel.h"
+#include "mQWidget.h"
 
-QStringList g_filters = {"png", "gif", "jpg", "jpeg", "webp"};
+
+static QStringList g_filters = {"png", "gif", "jpg", "jpeg", "webp"};
+
+
+using namespace std;
+
 
 QStringList list_dir(QString path){
     QDir dir(path);
     dir.setFilter(QDir::Files);
-    //dir.setSorting(QDir::Name|QDir::Reversed);
     dir.setSorting(QDir::Name);
     QFileInfoList list = dir.entryInfoList();
     int i = 0;
@@ -41,32 +33,7 @@ QStringList list_dir(QString path){
 
 }
 
-/*/////////////////////////////////////////////
-QStringList list_dir(QString path){
-    QStringList string_list;
-    QDirIterator dirIterator(path,QDir::Files|QDir::NoSymLinks);
-    while (dirIterator.hasNext())
-    {
-
-        QString temp_path = dirIterator.next();
-        QFileInfo temp_info;
-        temp_info.setFile(temp_path);
-        if(
-                g_filters.indexOf(temp_path.split(".").takeLast())!=-1
-                //&&
-                //temp_info.isFile()
-                ){
-            string_list<<temp_path;
-            d(temp_path);
-        }
-    }
-    string_list.sort();
-    return string_list;
-}
-*/////////////////////////////////////////////
-
-int main(int argc, char *argv[])
-{
+int main(int argc, char *argv[]){
     //init && set windows
     QApplication a(argc, argv);
     MainWindow w;
@@ -116,14 +83,6 @@ int main(int argc, char *argv[])
     image_label->image_list = list_dir(dir_path);
 
     //image_label->p_mainwindow = &w;
-
-
-
-
-
-
-
-
 
     return a.exec();
 }

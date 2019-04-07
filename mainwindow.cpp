@@ -1,56 +1,43 @@
-#include "mainwindow.h"
+#include "MainWindow.h"
 
-#include <Windows.h>
-#include <Windowsx.h>
-#include <QMouseEvent>
-#include <QApplication>
-#include <QDesktopWidget>
 
-#include <iostream>
 
+
+void d(QString msg){
+    std::cout<<msg.toStdString()<<std::endl;
+}
 
 
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-{
+    : QMainWindow(parent){
 
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow(){
 
 }
 
-void MainWindow::mousePressEvent(QMouseEvent *event)
-{
- if(event->button() == Qt::LeftButton)
- {
+void MainWindow::mousePressEvent(QMouseEvent *event){
+ if(event->button() == Qt::LeftButton){
       mouse_press = true;
-      //鼠标相对于窗体的位置（或者使用event->globalPos() - this->pos()）
       move_point = event->pos();;
  }
 }
-void MainWindow::mouseMoveEvent(QMouseEvent *event)
-{
-    //若鼠标左键被按下
-    if(mouse_press)
-    {
-        //鼠标相对于屏幕的位置
-        QPoint move_pos = event->globalPos();
 
-       //移动主窗体位置
+void MainWindow::mouseMoveEvent(QMouseEvent *event){
+    if(mouse_press){
+       QPoint move_pos = event->globalPos();
        this->move(move_pos - move_point);
     }
 }
-void MainWindow::mouseReleaseEvent(QMouseEvent *event)
-{
-    //设置鼠标为未被按下
 
+void MainWindow::mouseReleaseEvent(QMouseEvent *event){
     mouse_press = false;
+    event->ignore();
 }
 
 void MainWindow::next_image_resize(int w, int h){
         this->resize(w+32, h+32);
         this->move((QApplication::desktop()->width() - this->width())/2,(QApplication::desktop()->height() - this->height())/2);
-    }
+}

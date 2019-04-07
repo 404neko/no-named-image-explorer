@@ -23,13 +23,13 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += main.cpp\
-        mainwindow.cpp \
-    mqlabel.cpp \
-    mqwidget.cpp
+SOURCES += Main.cpp\
+        MainWindow.cpp \
+    mQLabel.cpp \
+    mQWidget.cpp
 
-HEADERS  += mainwindow.h \
-    mqlabel.h \
-    mqwidget.h
+HEADERS  += MainWindow.h \
+    mQLabel.h \
+    mQWidget.h
 
 RESOURCES +=

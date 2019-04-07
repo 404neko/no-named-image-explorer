@@ -1,13 +1,30 @@
 #ifndef MQLABEL_H
 #define MQLABEL_H
 
+
+#include <iostream>
+
+#include <QKeyEvent>
+#include <QMovie>
+#include <QImage>
+#include <QObject>
+#include <QMessageBox>
+#include <QSize>
+#include <QDesktopWidget>
+#include <QApplication>
+#include <QRect>
+#include <QPainter>
+#include <QPixmap>
+#include <QGuiApplication>
+#include <QScreen>
 #include <QObject>
 #include <QEvent>
 #include <QLabel>
 #include <QSize>
 #include <QPixmap>
 
-#include "mainwindow.h"
+#include "MainWindow.h"
+
 
 class mQLabel : public QLabel
 {
@@ -19,7 +36,7 @@ public:
     QSize set_image(QString path);
     QString now;
     QStringList image_list;
-    float max_scaled;
+    double max_scaled;
     MainWindow* p_mainwindow;
 
 protected:

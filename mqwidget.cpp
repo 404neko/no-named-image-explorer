@@ -1,8 +1,7 @@
-#include "mqwidget.h"
-#include <QKeyEvent>
+#include "mQWidget.h"
 
-mQWidget::mQWidget(QWidget *parent) : QWidget(parent)
-{
+
+mQWidget::mQWidget(QWidget *parent) : QWidget(parent){
     ;
 }
 
